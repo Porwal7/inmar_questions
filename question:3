@@ -1,0 +1,30 @@
+Question #3) Let’s say you have a CSV input file that contains thousands of credit card
+transactions. See sample below:
+Date,Description,TransactionAmount
+2023-10-01,Fuel,30.0
+2023-10-10,Fuel,41.0
+2023-10-31,Fuel,35.0
+
+3a) Write a simple block of Python code that (a) reads the input file (and all of its transactions)
+and (b) calculates the average transaction amount across all records.
+
+Answer in question3.py
+
+
+3b) If this file were to be saved in a GCS bucket, how could you access it from BigQuery?
+
+
+First I load gsc files in Bigquery datasets
+
+LOAD DATA OVERWRITE `inmar.credit_card.transcation_details`
+FROM FILES (
+  format = 'CSV',
+  uris = ['gs://bucket/path/file.csv']);
+
+
+
+ Then write bq query to calculate avg
+
+ SELECT AVG(TransactionAmount ) AS average_transaction_amount
+FROM `inmar.credit_card.transcation_details`;
+

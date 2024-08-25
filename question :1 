@@ -1,0 +1,10 @@
+Question #1) Given the Employee table below, Write a SQL query to fetch the count of
+employees by department with counts sorted in descending order. Only include departments
+whose total payroll is greater than $15000.
+
+
+SELECT department, COUNT(emp_id) AS employee_count
+FROM Employee
+GROUP BY department
+HAVING SUM(salary) > 15000
+ORDER BY employee_count DESC;

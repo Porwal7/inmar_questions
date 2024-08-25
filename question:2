@@ -1,0 +1,20 @@
+Question #2) Given a Product table with three columns:
+ID, UnitPrice, DepartmentID
+10, 1000, 2
+20, 5000, 3
+30, 3000, 2
+and a Department table with two columns:
+ID, DepartmentName
+1, Toys
+2, Furniture
+3, Hardware
+Write a SQL query that returns the Department Names along with the unit price amount of the
+most expensive product sold in each respective department. If the department doesn’t have any
+products, you should still list the department in the result set.
+
+
+
+query:
+
+select d.DepartmentName, max(unitprice) as most_expensive from Department d left join Product p on p.departmentid = d.id
+group by d.id

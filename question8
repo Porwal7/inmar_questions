@@ -1,0 +1,24 @@
+As a Data Engineer, you are tasked with designing a cloud-based ETL/ELT data pipeline for one
+of our company’s divisions. The business needs to have source data extracted from their legacy
+database, transformed, and loaded to a cloud database for downstream analytics and reporting.
+They need both the raw source data and the transformed output data to be archived in cloud
+storage and partitioned by export date. You are also provided with the following information:
+● Source data consists of 20-25 different payloads, all of which is stored in CSV format in
+the source system.
+● Data should be extracted from the source system overnight each night as part of a batch
+process
+● Source payloads will have to be filtered, joined together, and mapped to new output
+payloads with minor data transformations
+● The aggregated data should live in a data warehouse in GCP.
+
+Task
+1. Briefly describe what GCP services you would rely on to design this pipeline from
+beginning to end.
+a. This exercise does not require you to write any code.
+b. If you think you need additional information that wasn’t called out in the problem
+background, be creative and fill in the blanks as you see fit.
+
+
+For this problem I will use spark, gcs ,airflow and bigquery
+
+:First I setup jobs to load raw data into gcs
