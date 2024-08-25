@@ -19,6 +19,35 @@ b. If you think you need additional information that wasn’t called out in the 
 background, be creative and fill in the blanks as you see fit.
 
 
-For this problem I will use spark, gcs ,airflow and bigquery
+For this problem I will use spark, gcs ,airflow,dataproc and bigquery
 
-:First I setup jobs to load raw data into gcs
+Bronze Layer
+1:setup jobs to load raw data into gcs with partition on export_date
+
+Silver layer
+2: Create jobs in spark and run using dataproc to transform and join operation on data and save this to gcs with
+partition on export_date
+
+Gold Layer
+
+3: Create another spark job to store aggregated data  in gold layer with partition on export data and schedule job to
+append this data in Bigquery datasets
+
+Optimization applied on jobs:
+
+1: Scale Dataproc cluster dynamically based on the load
+2: Created table clustering on the basis of downstream user use case also create external table for less frequent
+accessed data
+3: Apply optimization on spark jobs like
+   - repartition and coalesce,
+   - use cache and persists,
+   - join optimization like broadcast and
+sort merge join,
+   - skewed data handling,
+   - If needed will tune memory parameters of spark
+   - Use bucketing from bronze layer for avoid exchange in join operation
+   - Use parquet file format
+4: I use medallion architecture because of incremental etl ,easy to implements and scalable
+
+
+
